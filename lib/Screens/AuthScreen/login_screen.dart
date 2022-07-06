@@ -5,7 +5,9 @@ import 'package:e_commerce/Utility/color_utility.dart';
 import 'package:e_commerce/Utility/common_button.dart';
 import 'package:e_commerce/Utility/text_field.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({Key? key}) : super(key: key);
@@ -19,56 +21,65 @@ class LoginScreen extends StatelessWidget {
       backgroundColor: const Color(0xffFFFFFF),
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 24),
-        child: Container(
+        child: SizedBox(
           height: double.infinity,
           child: SingleChildScrollView(
             child: Column(
               children: [
                 SizedBox(
-                  height: MediaQuery.of(context).size.height / 3,
+                  height: 150.h,
                 ),
-                const Text(
+                Text(
                   "Log in",
-                  style: TextStyle(fontSize: 50, fontWeight: FontWeight.w700),
+                  style: GoogleFonts.inter(
+                    fontSize: 50.sp,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-                const SizedBox(height: 57),
+                SizedBox(height: 57.h),
                 textFieldNormal(
                     controller: emailController, textFieldName: "Email"),
-                const SizedBox(height: 20),
+                SizedBox(height: 20.h),
                 passwordTextFienld(
                     controller: passwordController, textFieldName: "Password"),
-                const SizedBox(height: 62),
+                SizedBox(height: 60.h),
                 commonButton(
-                    name: "Log In",
-                    OnCallBack: () {
-                      ApiServices().loginAuth(emailController.text, passwordController.text, context);
-                    }),
+                  name: "Log In",
+                  OnCallBack: () {
+                    ApiServices().loginAuth(
+                      emailController.text,
+                      passwordController.text,
+                      context,
+                    );
+                  },
+                ),
                 const SizedBox(height: 23),
                 Text(
                   "Forgot your password?",
-                  style: TextStyle(
-                      color: color5DB075,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600),
+                  style: GoogleFonts.inter(
+                    color: color5DB075,
+                    fontSize: 15.sp,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
-                const SizedBox(
-                  height: 28,
+                SizedBox(
+                  height: 28.h,
                 ),
                 GestureDetector(
                   onTap: () {
-                    Get.to(() => SignUpScreen());
+                    Get.to(
+                      () => SignUpScreen(),
+                    );
                   },
                   child: Text(
                     "Need account ?",
-                    style: TextStyle(
-                        color: color5DB075,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600),
+                    style: GoogleFonts.inter(
+                      color: color5DB075,
+                      fontSize: 15.sp,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                 ),
-                const SizedBox(
-                  height: 70,
-                )
               ],
             ),
           ),

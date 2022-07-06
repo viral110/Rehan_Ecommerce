@@ -1,6 +1,6 @@
-
-
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 commonButton(
     {String name = "",
@@ -12,14 +12,19 @@ commonButton(
   return GestureDetector(
     onTap: OnCallBack,
     child: Container(
-      height: height ?? 50,
+      height: height ?? 60.h,
       alignment: Alignment.center,
       decoration: BoxDecoration(
-          color: backgroundColor, borderRadius: BorderRadius.circular(100)),
+        color: backgroundColor,
+        borderRadius: BorderRadius.circular(100),
+      ),
       child: Text(
         name,
-        style: TextStyle(
-            color: textColor, fontWeight: FontWeight.w600, fontSize: 17),
+        style: GoogleFonts.inter(
+          color: textColor,
+          fontWeight: FontWeight.w600,
+          fontSize: 18.sp,
+        ),
       ),
     ),
   );

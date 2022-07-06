@@ -1,16 +1,28 @@
-# e_commerce
+Completed Task 
 
-A new Flutter project.
+[*] Login Api Call 
+[*] Sign Up Api Call
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+New Task 
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+[] Create Hook If Logged in Then Directly Open Home Page.
+[] Add Circular Progress Indicator on Load.
+[] Remove Splash Screen Completely After First Get.to()
+[] Push and Remove Until After Successful Login / SignUp.
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+[] Dashboard Api 
+Credentials 
+
+testClient@gmail.com
+test123
+Call Get [] With Token => BASEURL/dashboard 
+     RESPONSE YOU WILL GET
+     ==> status:bool
+     ==> category:List // To Show on Home Circle Image
+     ==> banner:List // Top Banner
+     ==> product:List // New Produts
+     ==> user:Map // New Current User
+
+

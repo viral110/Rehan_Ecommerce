@@ -5,6 +5,7 @@ import 'dart:async';
 import 'package:e_commerce/Screens/AuthScreen/login_screen.dart';
 import 'package:e_commerce/Screens/AuthScreen/signup_screen.dart';
 import 'package:e_commerce/Utility/color_utility.dart';
+import 'package:e_commerce/Utility/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -16,8 +17,6 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  Timer? _timer;
-
   @override
   void initState() {
     splashTimer();
@@ -41,6 +40,11 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   splashTimer() {
-    Timer(Duration(seconds: 3), () => Get.to(() => SignUpScreen()));
+    Future.delayed(
+      const Duration(seconds: SPLASH_TIMER),
+      () => Get.to(
+        () => LoginScreen(),
+      ),
+    );
   }
 }
