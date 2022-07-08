@@ -103,6 +103,7 @@ class ApiServices {
         if (response.statusCode == 200) {
 
           dashBoardModel = DashBoardModel.fromJson(decoded);
+          print(dashBoardModel.toJson());
           Fluttertoast.showToast(msg: "Home Screen");
 
           Get.to(() => const HomeScreen());
