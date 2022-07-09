@@ -42,20 +42,17 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   splashTimer() async {
-    final token =  await storageKey.read(key: 'access_token');
-    if(token != null){
+    final token = await storageKey.read(key: 'access_token');
+    if (token != null) {
       Future.delayed(
         const Duration(seconds: SPLASH_TIMER),
-            () => Get.to(
-              () => const HomeScreen(),
-        ),
+        () => Get.off(() => const HomeScreen()),
+
       );
-    }else{
+    } else {
       Future.delayed(
         const Duration(seconds: SPLASH_TIMER),
-            () => Get.to(
-              () => LoginScreen(),
-        ),
+        () => Get.off(() => LoginScreen()),
       );
     }
   }

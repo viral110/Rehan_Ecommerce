@@ -15,6 +15,7 @@ dependencies:
   flutter_secure_storage:
   fluttertoast:
   flutter_screenutil: ^5.5.3+2
+  video_player: any
   google_fonts:
   iconly: ^1.0.1
   cached_network_image: 

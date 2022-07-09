@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:e_commerce/Api_Services/api.dart';
 import 'package:e_commerce/DataProvider/data_provider.dart';
 import 'package:e_commerce/Screens/ProductScreens/order_history.dart';
 import 'package:e_commerce/Utility/color_utility.dart';
@@ -26,9 +29,43 @@ class _HomeScreenState extends State<HomeScreen> {
     final fetchDashBoardData =
         Provider.of<DataProvider>(context, listen: false);
     fetchDashBoardData.getDashBoardDetailsProvider(context);
+    WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
+      if (controller.hasClients) {
+        controller.animateToPage(
+          currentPageValue,
+          duration: Duration(milliseconds: 1000),
+          curve: Curves.easeIn,
+        );
+      }
+    });
+    Timer.periodic(const Duration(seconds: 2), (Timer timer) {
+      if (fetchDashBoardData.isLoading == true) {
+        if (currentPageValue ==
+            fetchDashBoardData.dashBoardModel?.banner?.length) {
+          end = true;
+        } else if (currentPageValue == 0) {
+          end = false;
+        }
+      }
+
+      if (end == false) {
+        currentPageValue++;
+      } else {
+        currentPageValue--;
+      }
+
+      controller.animateToPage(
+        currentPageValue,
+        duration: Duration(milliseconds: 1000),
+        curve: Curves.easeIn,
+      );
+    });
   }
 
   int activePage = 0;
+  int currentPageValue = 0;
+
+  bool end = false;
 
   PageController controller = PageController();
 
@@ -157,6 +194,24 @@ class _HomeScreenState extends State<HomeScreen> {
                                           },
                                         ),
                                       ),
+                                Container(
+                                  margin: const EdgeInsets.only(bottom: 5),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      for (int i = 0;
+                                          i <
+                                              data.dashBoardModel!.banner!
+                                                  .length;
+                                          i++)
+                                        if (i == currentPageValue) ...[
+                                          circleBar(true)
+                                        ] else
+                                          circleBar(false),
+                                    ],
+                                  ),
+                                ),
                                 Padding(
                                   padding: EdgeInsets.only(
                                     left: 10.w,
@@ -266,6 +321,18 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  Widget circleBar(bool isActive) {
+    return AnimatedContainer(
+      duration: Duration(milliseconds: 150),
+      margin: EdgeInsets.symmetric(horizontal: 4),
+      height: isActive ? 7 : 7,
+      width: isActive ? 7 : 7,
+      decoration: BoxDecoration(
+          color: isActive ? Colors.pink : Colors.grey.withOpacity(0.2),
+          borderRadius: BorderRadius.all(Radius.circular(12))),
+    );
+  }
+
   newProductList({bool isShrinkWrap = true, required DataProvider data}) {
     return GridView.builder(
       padding: EdgeInsets.only(
@@ -291,8 +358,10 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           padding: const EdgeInsets.all(10.0),
           child: InkWell(
-            onTap: () {
-              Get.to(() => const CategoryDetails());
+            onTap: () async {
+              Get.to(() => CategoryDetails(
+                    productId: data.dashBoardModel!.product![index].id,
+                  ));
             },
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
